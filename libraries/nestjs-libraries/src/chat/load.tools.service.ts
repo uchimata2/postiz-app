@@ -8,6 +8,7 @@ import { ModuleRef } from '@nestjs/core';
 import { toolList } from '@gitroom/nestjs-libraries/chat/tools/tool.list';
 import { AgentToolInterface } from '@gitroom/nestjs-libraries/chat/agent.tool.interface';
 import dayjs from 'dayjs';
+import { agentModel } from '@gitroom/nestjs-libraries/openai/ai.models';
 
 export const AgentState = object({
   proverbs: array(string()).default([]),
@@ -100,7 +101,7 @@ export class LoadToolsService {
       )}
 `;
       },
-      model: openai('gpt-5.2'),
+      model: openai(agentModel('gpt-5.2')),
       tools,
       memory: new Memory({
         storage: pStore,
